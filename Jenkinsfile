@@ -6,7 +6,7 @@ pipeline {
         stage('Build') { 
           steps {
             withMaven(
-              maven: 'maven'
+              maven: 'maven',
               mavenLocalRepo: '~/.m2/repository'){
               sh 'mvn -B -DskipTests clean package' 
               }
