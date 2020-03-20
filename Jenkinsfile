@@ -5,16 +5,19 @@ pipeline {
     stages {
 
         stage('Build') { 
-            steps {
-                sh 'mvn -B -DskipTests clean package' 
-            }
+            withMaven(maven: 'maven'){
+              sh 'mvn -B -DskipTests clean package' 
+              }
         }
 
         stage('Test') { 
 		   
             steps {
-                sh 'mvn test' 
+               withMaven(maven: 'maven'){
+              sh 'mvn test' 
+              }
             }
+            
         }
 
         stage('Deploy') { 
@@ -25,8 +28,10 @@ pipeline {
                 }            
               }            
            steps {                
-           	sh 'mvn deploy'           
-           	  }        
-           	}
+           	withMaven(maven: 'maven'){
+              sh 'mvn deploy' 
+              }
+            }        
+        }
     }
 }
