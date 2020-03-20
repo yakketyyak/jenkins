@@ -8,7 +8,7 @@ pipeline {
             withMaven(
               maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
-              sh 'mvn -B -DskipTests clean package -Dmaven.repo.local=.m2' 
+              sh 'mvn -B -DskipTests clean package' 
               }
             }
         }
@@ -18,7 +18,7 @@ pipeline {
             steps {
                withMaven(maven: 'maven-3.6.3',
                 mavenLocalRepo: '.repository'){
-              sh 'mvn test -Dmaven.repo.local=.m2' 
+              sh 'mvn test' 
               }
             }
             
@@ -34,7 +34,7 @@ pipeline {
            steps {                
            	withMaven(maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
-              sh 'mvn deploy -Dmaven.repo.local=.m2' 
+              sh 'mvn deploy' 
               }
             }        
         }
