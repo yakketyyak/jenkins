@@ -1,16 +1,13 @@
 pipeline {
    
 	 agent any
-   environment{
-    HOME = '/Users/admin'
-   }
     stages {
 
         stage('Build') { 
           steps {
             withMaven(
               maven: 'maven'
-              mavenLocalRepo: '$HOME/.m2'){
+              mavenLocalRepo: '~/.m2/repository'){
               sh 'mvn -B -DskipTests clean package' 
               }
             }
