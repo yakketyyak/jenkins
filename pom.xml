@@ -19,11 +19,12 @@
 	</properties>
 	
 	<distributionManagement>
-   <snapshotRepository>
-      <id>nexus-snapshots</id>
-      <url>${user.home}/repository</url>
-   </snapshotRepository>
-	</distributionManagement>
+    <repository>
+        <id>dev</id>
+        <name>Local repository</name>
+        <url>file://${user.home}/.m2/repository</url>
+    </repository>
+    </distributionManagement>
 
 	<dependencies>
 		<dependency>
