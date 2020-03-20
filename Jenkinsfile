@@ -6,7 +6,8 @@ pipeline {
         stage('Build') { 
           steps {
             withMaven(
-              maven: 'maven-3.6.3'){
+              maven: 'maven-3.6.3',
+              mavenLocalRepo: '.repository'){
               sh 'mvn -B -DskipTests clean package -Dmaven.repo.local=.m2' 
               }
             }
@@ -15,7 +16,8 @@ pipeline {
         stage('Test') { 
 		   
             steps {
-               withMaven(maven: 'maven-3.6.3'){
+               withMaven(maven: 'maven-3.6.3',
+                mavenLocalRepo: '.repository'){
               sh 'mvn test -Dmaven.repo.local=.m2' 
               }
             }
@@ -30,7 +32,8 @@ pipeline {
                 }            
               }            
            steps {                
-           	withMaven(maven: 'maven-3.6.3'){
+           	withMaven(maven: 'maven-3.6.3',
+              mavenLocalRepo: '.repository'){
               sh 'mvn deploy -Dmaven.repo.local=.m2' 
               }
             }        
