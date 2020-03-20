@@ -16,7 +16,8 @@ pipeline {
         stage('Test') { 
 		   
             steps {
-               withMaven(maven: 'maven-3.6.3'){
+               withMaven(maven: 'maven-3.6.3'
+                mavenLocalRepo: '~/.m2/repository'){
               sh 'mvn test' 
               }
             }
@@ -31,7 +32,8 @@ pipeline {
                 }            
               }            
            steps {                
-           	withMaven(maven: 'maven-3.6.3'){
+           	withMaven(maven: 'maven-3.6.3'
+              mavenLocalRepo: '~/.m2/repository'){
               sh 'mvn deploy' 
               }
             }        
