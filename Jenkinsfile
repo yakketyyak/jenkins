@@ -1,6 +1,9 @@
 pipeline {
-
+   
 	 agent any
+   environment{
+    HOME = '/Users/admin'
+   }
     stages {
 
         stage('Build') { 
