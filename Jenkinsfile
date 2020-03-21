@@ -34,8 +34,8 @@ pipeline {
         }
 
         stage('Build docker image') {           
-           script {                
-            docker.build('spring-test:0.0.1-SNAPSHOT')
+           steps {                
+             sh "docker build -t spring-test:${BUILD_NUMBER} -f Dockerfile ."
             }        
         }
     }
