@@ -15,7 +15,7 @@ pipeline {
 
         stage('Test') { 
             agent {
-              label 'maven'
+              label 'maven-3.6.3'
             }
             steps {
                sh 'mvn test' 
@@ -25,7 +25,7 @@ pipeline {
 
         stage('Deploy') {   
            agent {
-              label 'maven'
+              label 'maven-3.6.3'
             }      
            steps {  
             sh 'mvn deploy' 
