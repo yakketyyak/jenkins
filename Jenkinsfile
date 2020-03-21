@@ -6,7 +6,7 @@ pipeline {
 
         stage('Build') { 
           agent {
-            label 'maven'
+            label 'maven-3.6.3'
           }
           steps {
             sh 'mvn -B -DskipTests clean package' 
@@ -35,9 +35,9 @@ pipeline {
         stage('Build image') {   
            agent any
            environment {
-          //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-          IMAGE = readMavenPom().getArtifactId()
-          VERSION = readMavenPom().getVersion()
+            //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+            IMAGE = readMavenPom().getArtifactId()
+            VERSION = readMavenPom().getVersion()
           }      
            steps {  
             sh 'docker build -t spring-test:${VERSION} -f Dockerfile .' 
