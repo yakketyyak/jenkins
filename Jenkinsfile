@@ -31,5 +31,12 @@ pipeline {
             sh 'mvn deploy' 
            }        
         }
+
+        stage('Build image') {   
+           agent any      
+           steps {  
+            sh 'docker build -t spring-test:${VERSION} -f Dockerfile .' 
+           }        
+        }
     }
 }
