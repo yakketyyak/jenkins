@@ -43,5 +43,14 @@ pipeline {
             sh 'docker build -t spring-test:${VERSION} -f Dockerfile .' 
            }        
         }
+
+        stage('Launch') {   
+           agent {
+              label 'tomcat-9.0.33'
+            }      
+           steps {  
+            sh 'java -jar spring-test:${VERSION}.jar' 
+           }        
+        }
     }
 }
