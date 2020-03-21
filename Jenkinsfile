@@ -1,6 +1,6 @@
 pipeline {
    
-    agent any
+    agent none
 
     stages {
 
@@ -9,7 +9,6 @@ pipeline {
             label 'maven'
           }
           steps {
-            sh 'java --version'
             sh 'mvn -B -DskipTests clean package' 
           }
         }
@@ -24,7 +23,10 @@ pipeline {
             
         }
 
-        stage('Deploy') {         
+        stage('Deploy') {   
+           agent {
+              label 'maven'
+            }      
            steps {  
             sh 'mvn deploy' 
            }        
