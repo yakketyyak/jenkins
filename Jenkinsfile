@@ -36,7 +36,7 @@ pipeline {
         stage('Build docker image') {    
            
            steps {                
-             sh "docker build -t spring-test:${BUILD_NUMBER} -f Dockerfile ."
+             sh "docker build -t spring-test:${POM_VERSION} -f Dockerfile ."
             }        
         }
     }
