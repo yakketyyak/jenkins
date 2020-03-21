@@ -1,6 +1,11 @@
 pipeline {
    
-	 agent any
+	 agent {
+        docker {
+            image 'maven:3.6.3-jdk-8'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
    environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     IMAGE = readMavenPom().getArtifactId()
@@ -11,31 +16,21 @@ pipeline {
 
         stage('Build') { 
           steps {
-            withMaven(
-              maven: 'maven-3.6.3',
-              mavenLocalRepo: '.repository'){
-              sh 'mvn -B -DskipTests clean package' 
-              }
+             sh 'mvn -B -DskipTests clean package' 
             }
         }
 
         stage('Test') { 
 		   
             steps {
-               withMaven(maven: 'maven-3.6.3',
-                mavenLocalRepo: '.repository'){
-              sh 'mvn test' 
-              }
+               sh 'mvn test' 
             }
             
         }
 
         stage('Deploy') {           
-           steps {                
-           	withMaven(maven: 'maven-3.6.3',
-              mavenLocalRepo: '.repository'){
-              sh 'mvn deploy' 
-              }
+           steps {  
+            sh 'mvn deploy' 
             }        
         }
 
