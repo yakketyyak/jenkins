@@ -1,61 +1,49 @@
 pipeline {
    
-    agent none
+   agent any
+   environment {
+    //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    IMAGE = readMavenPom().getArtifactId()
+    VERSION = readMavenPom().getVersion()
+    }
 
     stages {
 
         stage('Build') { 
-          agent {
-            label 'maven-3.6.3'
-          }
           steps {
-            sh 'mvn -B -DskipTests clean package' 
-          }
+            withMaven(
+              maven: 'maven-3.6.3',
+              mavenLocalRepo: '.repository'){
+              sh 'mvn -B -DskipTests clean package' 
+              }
+            }
         }
 
         stage('Test') { 
-            agent {
-              label 'maven-3.6.3'
-            }
+       
             steps {
-               sh 'mvn test' 
+               withMaven(maven: 'maven-3.6.3',
+                mavenLocalRepo: '.repository'){
+              sh 'mvn test' 
+              }
             }
             
         }
 
-        stage('Deploy') {   
-           agent {
-              label 'maven-3.6.3'
-            }      
-           steps {  
-            sh 'mvn deploy' 
-           }        
+        stage('Deploy') {           
+           steps {                
+            withMaven(maven: 'maven-3.6.3',
+              mavenLocalRepo: '.repository'){
+              sh 'mvn deploy' 
+              }
+            }        
         }
 
-        stage('Build image') {   
-           agent any
-           environment {
-            //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-            IMAGE = readMavenPom().getArtifactId()
-            VERSION = readMavenPom().getVersion()
-          }      
-           steps {  
-            sh 'docker build -t spring-test:${VERSION} -f Dockerfile .' 
-           }        
-        }
-
-        stage('Launch') {   
-           agent {
-              label 'tomcat-9.0.33'
-            } 
-            environment {
-            //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-            IMAGE = readMavenPom().getArtifactId()
-            VERSION = readMavenPom().getVersion()
-            }          
-           steps {  
-            sh 'java -jar spring-test:${VERSION}.jar' 
-           }        
+        stage('Build docker image') {    
+           
+           steps {                
+             sh "docker build -t spring-test:${VERSION} -f Dockerfile ."
+            }        
         }
     }
 }
