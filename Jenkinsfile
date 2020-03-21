@@ -47,7 +47,12 @@ pipeline {
         stage('Launch') {   
            agent {
               label 'tomcat-9.0.33'
-            }      
+            } 
+            environment {
+            //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+            IMAGE = readMavenPom().getArtifactId()
+            VERSION = readMavenPom().getVersion()
+            }          
            steps {  
             sh 'java -jar spring-test:${VERSION}.jar' 
            }        
