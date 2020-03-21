@@ -34,8 +34,9 @@ pipeline {
         }
 
         stage('Build docker image') {    
-           agent {
-            dockerfile true
+           
+           steps {                
+             sh "docker build -t spring-test:${BUILD_NUMBER} -f Dockerfile ."
             }        
         }
     }
