@@ -34,11 +34,6 @@ pipeline {
             }        
         }
 
-        stage('Build docker image') {    
-           
-           steps {                
-             sh "docker build -t spring-test:${VERSION} -f Dockerfile ."
-            }        
-        }
+      
     }
 }
