@@ -5,6 +5,7 @@ pipeline {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     IMAGE = readMavenPom().getArtifactId()
     VERSION = readMavenPom().getVersion()
+    GITHUB_CREDS = credentials('github')
     }
 
     stages {
@@ -14,6 +15,7 @@ pipeline {
             withMaven(
               maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
+              sh '${env.GITHUB_CREDS}'
               sh 'mvn -B -DskipTests clean package' 
               }
             }
