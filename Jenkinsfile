@@ -15,7 +15,7 @@ pipeline {
             withMaven(
               maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
-              sh '${env.GITHUB_CREDS}'
+              sh 'echo ${GITHUB_CREDS}'
               sh 'mvn -B -DskipTests clean package' 
               }
             }
