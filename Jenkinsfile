@@ -60,8 +60,9 @@ pipeline {
                         transfers: [
                             sshTransfer(
                               sourceFiles: "${IMAGE}-${VERSION}.jar",
-                              remoteDirectory: ".",
-                              execCommand: "ls -a  && java -jar ${IMAGE}-${VERSION}.jar"
+                              removePrefix: "**/ci/pabeu/${IMAGE}/${VERSION}"
+                              //remoteDirectory: ".",
+                              execCommand: "java -jar ${IMAGE}-${VERSION}.jar"
                             )
                         ],
                         useWorkspaceInPromotion: true,
