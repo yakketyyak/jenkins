@@ -5,9 +5,8 @@ pipeline {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     IMAGE = readMavenPom().getArtifactId()
     VERSION = readMavenPom().getVersion()
-    GITHUB_CREDS = credentials('github')
+    //GITHUB_CREDS = credentials('github')
     SSH_LOCAL_HOST = 'localhost'
-    SSH_DEST = "~/deployJenkins"
     }
 
     stages {
@@ -17,7 +16,7 @@ pipeline {
             withMaven(
               maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
-              sh 'echo ${GITHUB_CREDS}'
+              sh 'echo ${IMAGE}'
               sh 'mvn -B -DskipTests clean package' 
               }
             }
@@ -61,8 +60,8 @@ pipeline {
                         transfers: [
                             sshTransfer(
                               sourceFiles: "spring-test:${VERSION}.jar",
-                              remoteDirectory: "${SSH_DEST}",
-                              execCommand: "java -jar ~/deployJenkins/*.jar"
+                              remoteDirectory: ".",
+                              execCommand: "ll -a  && java -jar ~/deployJenkins/*.jar"
                             )
                         ],
                         sshRetry: [
