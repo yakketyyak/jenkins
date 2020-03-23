@@ -26,6 +26,7 @@ pipeline {
        
             steps {
                withMaven(maven: 'maven-3.6.3',
+                //image docker
                 mavenLocalRepo: '.repository'){
               sh 'mvn test' 
               }
@@ -65,7 +66,7 @@ pipeline {
                               //removePrefix: "target",
                               //remoteDirectory: ".",
                               //execCommand: "java -jar **/${IMAGE}-${VERSION}.jar"
-                              execCommand: "mv target/${IMAGE}-${VERSION}.jar target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
+                              execCommand: "pwd && mv target/${IMAGE}-${VERSION}.jar target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
                             )
                         ],
                         useWorkspaceInPromotion: true,
