@@ -65,7 +65,7 @@ pipeline {
                               //removePrefix: "target",
                               //remoteDirectory: ".",
                               //execCommand: "java -jar **/${IMAGE}-${VERSION}.jar"
-                              execCommand: "mv **/${IMAGE}-${VERSION}.jar **/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
+                              execCommand: "mv target/${IMAGE}-${VERSION}.jar target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
                             )
                         ],
                         useWorkspaceInPromotion: true,
