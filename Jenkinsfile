@@ -38,8 +38,10 @@ pipeline {
            steps {                
             withMaven(maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
-              sh 'mvn deploy' 
-              sh 'echo ${WORKSPACE}'
+              sh '''
+                mvn deploy
+                echo M2_HOME ${M2_HOME}
+              '''
               }
             }        
         }
