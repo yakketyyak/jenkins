@@ -65,6 +65,7 @@ pipeline {
                             )
                         ],
                         useWorkspaceInPromotion: true,
+                        usePromotionTimestamp: true,
                         sshRetry: [
                           retries: 2,
                           retryDelay: 3600
