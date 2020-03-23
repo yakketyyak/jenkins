@@ -61,7 +61,7 @@ pipeline {
                         transfers: [
                             sshTransfer(
                               //${WORKSPACE}/.repository/${IMAGE}-${VERSION}.jar
-                              sourceFiles: "**/*.jar",
+                              sourceFiles: "**/*${IMAGE}-${VERSION}.jar",
                               //removePrefix: "${WORKSPACE}/.repository/**/${IMAGE}/${VERSION}",
                               //remoteDirectory: ".",
                               execCommand: "java -jar ${IMAGE}-${VERSION}.jar"
