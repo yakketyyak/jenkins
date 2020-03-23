@@ -38,6 +38,7 @@ pipeline {
             withMaven(maven: 'maven-3.6.3',
               mavenLocalRepo: '.repository'){
               sh 'mvn deploy' 
+              sh '${WORKSPACE}'
               }
             }        
         }
@@ -59,7 +60,7 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "**/${IMAGE}-${VERSION}.jar",
+                              sourceFiles: "${WORKSPACE}/.repository/${IMAGE}-${VERSION}.jar",
                               removePrefix: "**/ci/pabeu/${IMAGE}/${VERSION}",
                               //remoteDirectory: ".",
                               execCommand: "java -jar ${IMAGE}-${VERSION}.jar"
@@ -67,10 +68,10 @@ pipeline {
                         ],
                         useWorkspaceInPromotion: true,
                         usePromotionTimestamp: true,
-                        sshRetry: [
+                        /*sshRetry: [
                           retries: 2,
                           retryDelay: 3600
-                        ]
+                        ]*/
                     )
                 ]
             )
