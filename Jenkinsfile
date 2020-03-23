@@ -45,7 +45,7 @@ pipeline {
         stage('Build docker image') {    
            
            steps {                
-             sh "docker build -t spring-test:${VERSION} -f Dockerfile ."
+             sh "docker build -t ${IMAGE}:${VERSION} -f Dockerfile ."
             }        
         }
 
@@ -59,9 +59,9 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "spring-test:${VERSION}.jar",
+                              sourceFiles: "${IMAGE}-${VERSION}.jar",
                               remoteDirectory: ".",
-                              execCommand: "ll -a  && java -jar ~/deployJenkins/*.jar"
+                              execCommand: "ll -a  && java -jar ${IMAGE}-${VERSION}.jar"
                             )
                         ],
                         sshRetry: [
