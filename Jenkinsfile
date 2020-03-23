@@ -15,8 +15,8 @@ pipeline {
           steps {
             withMaven(
               maven: 'maven-3.6.3',
+              globalMavenSettingsFilePath: '${user.home}/.m2/settings.xml',
               mavenLocalRepo: '.repository'){
-              sh 'echo ${IMAGE}'
               sh 'mvn -B -DskipTests clean package' 
               }
             }
