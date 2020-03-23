@@ -48,8 +48,11 @@ class SpringTestApplicationTests {
 	public void test2FindByFirstName() {
 
 		ci.pabeu.test.model.Test foundEntity = testRepository.findByFirstName("Aliko");
+		// ci.pabeu.test.model.Test foundEntityId =
+		// testRepository.getOne(foundEntity.getId());
 
 		assertNotNull(foundEntity);
+		// assertSame(foundEntity, foundEntityId);
 	}
 
 }
