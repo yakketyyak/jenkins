@@ -64,6 +64,7 @@ pipeline {
                               execCommand: "ll -a  && java -jar ${IMAGE}-${VERSION}.jar"
                             )
                         ],
+                        useWorkspaceInPromotion: true
                         sshRetry: [
                           retries: 2,
                           retryDelay: 3600
