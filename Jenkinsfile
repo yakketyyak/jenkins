@@ -61,7 +61,7 @@ pipeline {
                             sshTransfer(
                               sourceFiles: "${IMAGE}-${VERSION}.jar",
                               remoteDirectory: ".",
-                              execCommand: "ll -a  && java -jar ${IMAGE}-${VERSION}.jar"
+                              execCommand: "ls -a  && java -jar ${IMAGE}-${VERSION}.jar"
                             )
                         ],
                         useWorkspaceInPromotion: true,
