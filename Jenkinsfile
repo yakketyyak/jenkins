@@ -59,7 +59,7 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "${IMAGE}-${VERSION}.jar",
+                              sourceFiles: "**/${IMAGE}-${VERSION}.jar",
                               removePrefix: "**/ci/pabeu/${IMAGE}/${VERSION}",
                               //remoteDirectory: ".",
                               execCommand: "java -jar ${IMAGE}-${VERSION}.jar"
