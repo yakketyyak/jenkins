@@ -66,7 +66,7 @@ pipeline {
                               //removePrefix: "target",
                               //remoteDirectory: ".",
                               //execCommand: "java -jar **/${IMAGE}-${VERSION}.jar"
-                              execCommand: "mv deployJenkins/target/${IMAGE}-${VERSION}.jar deployJenkins/target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
+                              execCommand: "mv ${remoteDirectory}/target/${IMAGE}-${VERSION}.jar ${remoteDirectory}/target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
                             )
                         ],
                         useWorkspaceInPromotion: true,
