@@ -1,27 +1,34 @@
-def SSH_LOCAL_HOST = 'localhost'
-def fileName = ${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}
+pipeline {
+    agent any
+    environment {
+    //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    FILE_NAME = readMavenPom().getArtifactId()-readMavenPom().getVersion().jar
+    }
 
-node {
+    stage('Docker Build') { 
+      steps{
+        script{
+          docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
+        
+        stage('Build'){
+          git 'https://github.com/yakketyyak/jenkins.git'
+          sh '''
+             mvn -v
+             mvn -B -DskipTests clean package
+          '''
+        }
 
-    stage('Main Build') { 
-      docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
-      	
-      	stage('Build'){
-			    git 'https://github.com/yakketyyak/jenkins.git'
-	        sh '''
-	           mvn -v
-	           mvn -B -DskipTests clean package
-	        '''
-      	}
-
-      	stage('Test'){
-      		sh '''
+        stage('Test'){
+          sh '''
             mvn test
             echo $WORKSPACE
           '''
-      	}
+        }
       }
     }
+   }
+      
+  }
     stage('SSH transfer'){
           steps([$class: 'BapSshPromotionPublisherPlugin']){
             sshPublisher(
@@ -32,8 +39,8 @@ node {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "**/*${fileName}",
-                              execCommand: "mv deployJenkins/target/${fileName} deployJenkins/target/${fileName}"
+                              sourceFiles: "**/*${FILE_NAME}",
+                              execCommand: "mv deployJenkins/target/${FILE_NAME} deployJenkins/target/${FILE_NAME}"
                             )
                         ],
                         useWorkspaceInPromotion: true,
@@ -42,8 +49,5 @@ node {
                 ]
             )
           }
-        }
-
-    // Clean up workspace
-    //step([$class: 'WsCleanup'])
+    }
 }
