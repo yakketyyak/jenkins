@@ -2,9 +2,8 @@ pipeline {
     agent any
     environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-    IMAGE = readMavenPom().getArtifactId()
-    VERSION = readMavenPom().getVersion()
-    FILE_NAME = '${IMAGE} + ${VERSION}.jar'
+      pom = readMavenPom file: 'pom.xml'
+      FILE_NAME = 'pom.artifactId + pom.version.jar'
     }
 
     stages
@@ -14,20 +13,20 @@ pipeline {
         script{
           docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
         
-        stage('Build'){
-          git 'https://github.com/yakketyyak/jenkins.git'
-          sh '''
-             mvn -v
-             mvn -B -DskipTests clean package
-          '''
-        }
+          stage('Build'){
+            git 'https://github.com/yakketyyak/jenkins.git'
+            sh '''
+               mvn -v
+               mvn -B -DskipTests clean package
+            '''
+          }
 
-        stage('Test'){
-          sh '''
-            mvn test
-            echo $WORKSPACE
-          '''
-        }
+          stage('Test'){
+            sh '''
+              mvn test
+              echo $WORKSPACE
+            '''
+          }
       }
     }
    }
