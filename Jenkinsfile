@@ -12,7 +12,10 @@ node {
       	}
 
       	stage('Test'){
-      		sh 'mvn test'
+      		sh '''
+            mvn test
+            echo $WORKSPACE
+          '''
       	}
       }
     }
