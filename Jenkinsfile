@@ -4,6 +4,7 @@ pipeline {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
       pom = readMavenPom file: 'pom.xml'
       FILE_NAME = 'pom.artifactId + pom.version.jar'
+      SSH_LOCAL_HOST = 'localhost'
     }
 
     stages
