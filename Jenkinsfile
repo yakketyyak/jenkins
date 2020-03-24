@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    stages
-    {
+    stages{
+
       stage('Docker Build') { 
         steps{
           script{
@@ -32,4 +32,5 @@ pipeline {
         nexusPublisher nexusInstanceId: 'nexus-localhost', nexusRepositoryId: 'maven-snapshots', packages: [], tagName: 'v1.0'
       }
     }
+  } 
 }
