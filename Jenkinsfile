@@ -7,7 +7,7 @@ node {
 			    git 'https://github.com/yakketyyak/jenkins.git'
 	        sh '''
 	           mvn -v
-	           mvn -B -s settings.xml -DskipTests clean package
+	           mvn -B -DskipTests clean package
 	        '''
       	}
 
