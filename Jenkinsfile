@@ -46,8 +46,8 @@ pipeline {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: '**/*${FILE_NAME}',
-                              execCommand: 'mv deployJenkins/target/${FILE_NAME} deployJenkins/target/${FILE_NAME}'
+                              sourceFiles: '**/*spring-test-0.0.1-SNAPSHOT.jar',
+                              execCommand: 'mv deployJenkins/target/spring-test-0.0.1-SNAPSHOT.jar deployJenkins/target/spring-test-0.0.1-SNAPSHOT.jar'
                             )
                         ],
                         useWorkspaceInPromotion: true,
