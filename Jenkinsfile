@@ -4,7 +4,7 @@ pipeline {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
     IMAGE = readMavenPom().getArtifactId()
     VERSION = readMavenPom().getVersion()
-    FILE_NAME = $IMAGE + '-' + $VERSION.jar
+    FILE_NAME = '${IMAGE} + '-' + ${VERSION}.jar'
     }
 
     stages
