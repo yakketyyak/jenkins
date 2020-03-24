@@ -42,7 +42,7 @@ pipeline {
                 continueOnError: false, failOnError: true,
                 publishers: [
                     sshPublisherDesc(
-                        configName: '${SSH_LOCAL_HOST}',
+                        configName: 'localhost',
                         verbose: true,
                         transfers: [
                             sshTransfer(
