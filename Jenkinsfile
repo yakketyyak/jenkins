@@ -39,12 +39,12 @@ pipeline {
                 continueOnError: false, failOnError: true,
                 publishers: [
                     sshPublisherDesc(
-                        configName: "${SSH_LOCAL_HOST}",
+                        configName: '${SSH_LOCAL_HOST}',
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "**/*${FILE_NAME}",
-                              execCommand: "mv deployJenkins/target/${FILE_NAME} deployJenkins/target/${FILE_NAME}"
+                              sourceFiles: '**/*${FILE_NAME}',
+                              execCommand: 'mv deployJenkins/target/${FILE_NAME} deployJenkins/target/${FILE_NAME}'
                             )
                         ],
                         useWorkspaceInPromotion: true,
