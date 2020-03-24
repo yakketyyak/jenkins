@@ -6,7 +6,7 @@ pipeline {
       artifactId = 'pom.artifactId'
       version    = 'pom.version' 
       packaging  = 'pom.packaging'
-      FILE_NAME  = artifactId + '-' + version + packaging
+      FILE_NAME  = 'artifactId' + '-' + 'version' + 'packaging'
       SSH_LOCAL_HOST = 'localhost'
     }
 
