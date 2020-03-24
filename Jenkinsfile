@@ -1,7 +1,7 @@
 node {
 
     stage('Main Build') { 
-      docker.image('maven:3.6-jdk-8').inside ('-v ~/.m2:${pwd()}/.m2repo'){
+      docker.image('maven:3.6-jdk-8').inside ('-v ~/.m2:/var/maven/.m2'){
       	
       	stage('Build'){
 			    git 'https://github.com/yakketyyak/jenkins.git'
