@@ -1,7 +1,8 @@
+def SSH_LOCAL_HOST = 'localhost'
+def fileName = ${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}
+
 node {
 
-    def SSH_LOCAL_HOST = 'localhost'
-    def fileName = ${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}
     stage('Main Build') { 
       docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
       	
