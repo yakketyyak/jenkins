@@ -2,7 +2,9 @@ pipeline {
     agent any
     environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-    FILE_NAME = readMavenPom().getArtifactId() + '-' + readMavenPom().getVersion().jar
+    IMAGE = readMavenPom().getArtifactId()
+    VERSION = readMavenPom().getVersion()
+    FILE_NAME = $IMAGE + '-' + $VERSION.jar
     }
 
     stages
