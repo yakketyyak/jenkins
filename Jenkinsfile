@@ -1,7 +1,7 @@
 node {
 
     stage('Main Build') { 
-      docker.image('maven:3.6.3-jdk-8').inside {
+      docker.image('maven:3.6-jdk-8').inside {
       	
       	stage('Build'){
 			    git 'https://github.com/yakketyyak/jenkins.git'
