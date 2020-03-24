@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+      ARTIFACTID = readMavenPom().getArtifactId()
+      VERSION = readMavenPom().getVersion()
+    }
     stages{
 
       stage('Docker Build') { 
@@ -31,6 +35,16 @@ pipeline {
       steps{
         //nexusPublisher nexusInstanceId: 'nexus-localhost', nexusRepositoryId: 'maven-snapshots', packages: [], tagName: 'v1.0'
         nexusArtifactUploader artifacts: [[artifactId: 'spring-test', classifier: '', file: 'target/spring-test-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-creds', groupId: 'ci.pabeu', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'v1.1'
+      }
+    }
+
+    stage('Deploy docker image'){
+      steps{
+        sh'''
+          docker build -t ${ARTIFACTID}:${VERSION} -f Dockerfile .
+          docker login -u admin -p admin localhost:8123
+          docker push localhost:8123/DockerRepo/${ARTIFACTID}:${VERSION}
+         '''
       }
     }
   } 
