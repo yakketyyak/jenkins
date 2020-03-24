@@ -1,7 +1,7 @@
 node {
-    def IMAGE = readMavenPom().getArtifactId()
-    def VERSION = readMavenPom().getVersion()
 
+    def SSH_LOCAL_HOST = 'localhost'
+    def fileName = ${POM_ARTIFACTID}-${POM_VERSION}.${POM_PACKAGING}
     stage('Main Build') { 
       docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
       	
@@ -31,8 +31,8 @@ node {
                         verbose: true,
                         transfers: [
                             sshTransfer(
-                              sourceFiles: "**/*${IMAGE}-${VERSION}.jar",
-                              execCommand: "mv deployJenkins/target/${IMAGE}-${VERSION}.jar deployJenkins/target/${IMAGE}-${VERSION}-${BUILD_TIMESTAMP}.jar"
+                              sourceFiles: "**/*${fileName}",
+                              execCommand: "mv deployJenkins/target/${fileName} deployJenkins/target/${fileName}"
                             )
                         ],
                         useWorkspaceInPromotion: true,
