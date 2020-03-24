@@ -5,7 +5,9 @@ pipeline {
     FILE_NAME = readMavenPom().getArtifactId() + '-' + readMavenPom().getVersion().jar
     }
 
-    stage('Docker Build') { 
+    stages
+    {
+      stage('Docker Build') { 
       steps{
         script{
           docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
@@ -50,4 +52,5 @@ pipeline {
             )
           }
     }
+   } 
 }
