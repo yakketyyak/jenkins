@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
     //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
-      pom = readMavenPom file: 'pom.xml'
+      pom = readMavenPom file: 'pom.xml', encoding: 'UTF-8'
       artifactId = "pom.artifactId"
       version    = "pom.version" 
       packaging  = "pom.packaging"
