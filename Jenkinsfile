@@ -1,11 +1,11 @@
 node {
 
     stage('Main Build') { 
-      docker.image('maven:3.6-jdk-8').inside {
+      docker.image('maven:3.6-jdk-8').inside ('-v ~/.m2:${pwd()}/.m2repo'){
       	
       	stage('Build'){
 			    git 'https://github.com/yakketyyak/jenkins.git'
-	        writeFile file: 'settings.xml', text: "<settings><localRepository>${pwd()}/.m2repo</localRepository></settings>"
+	        //writeFile file: 'settings.xml', text: "<settings><localRepository>${pwd()}/.m2repo</localRepository></settings>"
 	        sh '''
 	           mvn -v
 	           mvn -B -s settings.xml -DskipTests clean package
