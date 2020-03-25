@@ -59,8 +59,8 @@ pipeline {
 
     stage('Deploy docker image'){
       steps{
+        //docker rmi $(docker images --filter=reference="spring-test:0.0.1-SNAPSHOT" -q)
         sh'''
-          docker rmi $(docker images --filter=reference="spring-test:0.0.1-SNAPSHOT" -q)
           docker build -t spring-test:0.0.1-SNAPSHOT -f Dockerfile .
           docker login -u admin -p admin localhost:8123
           docker tag spring-test:0.0.1-SNAPSHOT spring-test:latest
