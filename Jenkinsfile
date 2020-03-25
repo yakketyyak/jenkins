@@ -63,7 +63,8 @@ pipeline {
           docker rmi $(docker images --filter=reference="${ARTIFACTID}:${VERSION}" -q)
           docker build -t ${ARTIFACTID}:${VERSION} -f Dockerfile .
           docker login -u admin -p admin localhost:8123
-          docker push localhost:8123/repository/docker-repo/${ARTIFACTID}:${VERSION}
+          docker tag ${ARTIFACTID}:${VERSION} localhost:8123/docker-repo/spring-test:latest
+          docker push localhost:8123/docker-repo/spring-test:latest
           docker logout localhost:8123
          '''
       }
