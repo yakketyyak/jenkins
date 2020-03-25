@@ -15,8 +15,8 @@ pipeline {
           
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
+              sh "echo ${env.packaging} "
               sh '''
-                 echo ${env.packaging} 
                  mvn -v
                  mvn -B -DskipTests clean package
               '''
