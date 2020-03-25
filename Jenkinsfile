@@ -32,9 +32,28 @@ pipeline {
     }
 
     stage('Deploy on nexus'){
-      steps{
+      steps([$class: 'NexusArtifactUploader']){
         //nexusPublisher nexusInstanceId: 'nexus-localhost', nexusRepositoryId: 'maven-snapshots', packages: [], tagName: 'v1.0'
-        nexusArtifactUploader artifacts: [[artifactId: 'spring-test', classifier: '', file: 'target/spring-test-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-creds', groupId: 'ci.pabeu', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'v1.0'
+        //nexusArtifactUploader artifacts: [[artifactId: 'spring-test', classifier: '', file: 'target/spring-test-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-creds', groupId: 'ci.pabeu', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'v1.0'
+        nexusArtifactUploader(
+          artifacts: [
+            [
+              artifactId: 'spring-test', 
+              classifier: '', 
+              file: 'target/spring-test-0.0.1-SNAPSHOT.jar', 
+              type: 'jar'
+            ]
+
+          ],
+          credentialsId: 'nexus-creds', 
+          groupId: 'ci.pabeu', 
+          nexusUrl: 'localhost:8081', 
+          nexusVersion: 'nexus3', 
+          protocol: 'http', 
+          repository: 'maven-releases', 
+          version: 'v1.0'
+
+        )
       }
     }
 
@@ -43,7 +62,7 @@ pipeline {
         sh'''
           docker build -t ${ARTIFACTID}:${VERSION} -f Dockerfile .
           docker login -u admin -p admin localhost:8123
-          docker push localhost:8123/repository/DockerRepo/${ARTIFACTID}:${VERSION}
+          docker push localhost:8123/repository/docker-repo/${ARTIFACTID}:${VERSION}
           docker logout localhost:8123
          '''
       }
