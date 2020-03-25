@@ -45,16 +45,16 @@ pipeline {
         nexusArtifactUploader(
           artifacts: [
             [
-              artifactId: "$artifactId", 
+              artifactId: '$artifactId', 
               classifier: '', 
-              file: "target/$artifactId-$version.jar", 
+              file: 'target/$artifactId-$version.jar', 
               type: 'jar'
             ]
 
           ],
           credentialsId: 'nexus-creds', 
           groupId: 'ci.pabeu', 
-          nexusUrl: "$nexusUrl", 
+          nexusUrl: '$nexusUrl', 
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
