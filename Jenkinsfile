@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-      ARTIFACTID = readMavenPom().getArtifactId()
-      VERSION = readMavenPom().getVersion()
+      artifactId = readMavenPom().getArtifactId()
+      version = readMavenPom().getVersion()
       dockerImage = ''
       registry = "docker-repo/spring-test"
       registryCredential = 'nexus-creds'
@@ -35,22 +35,28 @@ pipeline {
     }
 
     stage('Deploy on nexus'){
+
+      environment {
+        artifactId = readMavenPom().getArtifactId()
+        version = readMavenPom().getVersion()
+        nexusUrl = "localhost:8081"
+      }
       steps([$class: 'NexusArtifactUploader']){
         //nexusPublisher nexusInstanceId: 'nexus-localhost', nexusRepositoryId: 'maven-snapshots', packages: [], tagName: 'v1.0'
         //nexusArtifactUploader artifacts: [[artifactId: 'spring-test', classifier: '', file: 'target/spring-test-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'nexus-creds', groupId: 'ci.pabeu', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: 'v1.0'
         nexusArtifactUploader(
           artifacts: [
             [
-              artifactId: 'spring-test', 
+              artifactId: "$artifactId", 
               classifier: '', 
-              file: 'target/spring-test-0.0.1-SNAPSHOT.jar', 
+              file: "target/$artifactId-$version.jar", 
               type: 'jar'
             ]
 
           ],
           credentialsId: 'nexus-creds', 
           groupId: 'ci.pabeu', 
-          nexusUrl: 'localhost:8081', 
+          nexusUrl: "$nexusUrl", 
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
