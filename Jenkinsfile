@@ -4,6 +4,7 @@ pipeline {
       dockerImage = ''
       registry = "docker-repo/spring-test"
       registryCredential = 'nexus-creds'
+      packaging = readMavenPom().getPackaging()
     }
     stages{
 
@@ -15,6 +16,7 @@ pipeline {
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
               sh '''
+                 echo ${env.packaging} 
                  mvn -v
                  mvn -B -DskipTests clean package
               '''
