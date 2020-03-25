@@ -3,6 +3,9 @@ pipeline {
     environment {
       ARTIFACTID = readMavenPom().getArtifactId()
       VERSION = readMavenPom().getVersion()
+      dockerImage = ''
+      registry = "docker-repo/spring-test"
+      registryCredential = 'nexus-creds'
     }
     stages{
 
@@ -51,7 +54,7 @@ pipeline {
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
-          version: 'v1.5'
+          version: 'v1.0'
 
         )
       }
@@ -60,13 +63,18 @@ pipeline {
     stage('Deploy docker image'){
       steps{
         //docker rmi $(docker images --filter=reference="spring-test:0.0.1-SNAPSHOT" -q)
-        sh'''
+        /*sh'''
           docker build -t spring-test:0.0.1-SNAPSHOT -f Dockerfile .
           docker login -u admin -p admin localhost:8123
           docker tag spring-test:0.0.1-SNAPSHOT localhost:8123/docker-repo/spring-test:latest
           docker push localhost:8123/docker-repo/spring-test:latest
-         '''
+         '''*/
          //docker logout localhost:8123
+         script{
+            dockerImage = docker.build registry + ":0.0.1-SNAPSHOT"
+            docker.withRegistry( 'http://localhost:8123/docker-repo', registryCredential ) {
+            dockerImage.push()
+         }
       }
     }
   } 
