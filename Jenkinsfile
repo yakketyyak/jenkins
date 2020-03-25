@@ -43,7 +43,8 @@ pipeline {
         sh'''
           docker build -t ${ARTIFACTID}:${VERSION} -f Dockerfile .
           docker login -u admin -p admin localhost:8123
-          docker push localhost:8123/DockerRepo/${ARTIFACTID}:${VERSION}
+          docker push localhost:8123/repository/DockerRepo/${ARTIFACTID}:${VERSION}
+          docker logout localhost:8123
          '''
       }
     }
