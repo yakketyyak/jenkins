@@ -47,14 +47,14 @@ pipeline {
             [
               artifactId: '${env.artifactId}', 
               classifier: '', 
-              file: 'target/${env.artifactId}-${env.version}.jar', 
+              file: "target/${env.artifactId}-${env.version}.jar", 
               type: 'jar'
             ]
 
           ],
           credentialsId: 'nexus-creds', 
           groupId: 'ci.pabeu', 
-          nexusUrl: '${env.nexusUrl}', 
+          nexusUrl: "${env.nexusUrl}", 
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
