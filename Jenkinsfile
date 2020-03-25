@@ -4,7 +4,6 @@ pipeline {
       dockerImage = ''
       registry = "docker-repo/spring-test"
       registryCredential = 'nexus-creds'
-      packaging = readMavenPom().getPackaging()
     }
     stages{
 
@@ -15,7 +14,6 @@ pipeline {
           
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
-              sh "echo ${env.packaging} "
               sh '''
                  mvn -v
                  mvn -B -DskipTests clean package
@@ -39,6 +37,7 @@ pipeline {
       environment {
         artifactId = readMavenPom().getArtifactId()
         version = readMavenPom().getVersion()
+        packaging = readMavenPom().getPackaging()
         nexusUrl = "localhost:8081"
       }
       steps([$class: 'NexusArtifactUploader']){
@@ -50,7 +49,7 @@ pipeline {
             [
               artifactId: "${env.artifactId}", 
               classifier: '', 
-              file: "target/${env.artifactId}-${env.version}.jar", 
+              file: "target/${env.artifactId}-${env.version}.${env.packaging}", 
               type: 'jar'
             ]
 
