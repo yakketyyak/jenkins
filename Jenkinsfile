@@ -74,7 +74,8 @@ pipeline {
             dockerImage = docker.build registry + ":0.0.1-SNAPSHOT"
             docker.withRegistry( 'http://localhost:8123', registryCredential ) {
             dockerImage.push('latest')
-         }
+           }
+        }
       }
     }
   } 
