@@ -67,6 +67,10 @@ pipeline {
     }
 
     stage('Deploy docker image'){
+      environment {
+        version = readMavenPom().getVersion()
+        registryUrl = 'http://localhost:8123'
+      }
       steps{
         //docker rmi $(docker images --filter=reference="spring-test:0.0.1-SNAPSHOT" -q)
         /*sh'''
@@ -77,8 +81,8 @@ pipeline {
          '''*/
          //docker logout localhost:8123
          script{
-            dockerImage = docker.build registry + ":0.0.1-SNAPSHOT"
-            docker.withRegistry( 'http://localhost:8123', registryCredential ) {
+            dockerImage = docker.build registry + version
+            docker.withRegistry(registryUrl, registryCredential ) {
             dockerImage.push('latest')
            }
         }
