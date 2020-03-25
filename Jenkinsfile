@@ -61,7 +61,7 @@ pipeline {
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
-          version: 'v1.1'
+          version: '1.0.0'
 
         )
       }
