@@ -63,7 +63,7 @@ pipeline {
         sh'''
           docker build -t spring-test:0.0.1-SNAPSHOT -f Dockerfile .
           docker login -u admin -p admin localhost:8123
-          docker tag spring-test:0.0.1-SNAPSHOT spring-test:latest
+          docker tag spring-test:0.0.1-SNAPSHOT localhost:8123/docker-repo/spring-test:latest
           docker push localhost:8123/docker-repo/spring-test:latest
          '''
          //docker logout localhost:8123
