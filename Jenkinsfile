@@ -1,8 +1,6 @@
 pipeline {
     agent any
     environment {
-      artifactId = readMavenPom().getArtifactId()
-      version = readMavenPom().getVersion()
       dockerImage = ''
       registry = "docker-repo/spring-test"
       registryCredential = 'nexus-creds'
@@ -60,7 +58,7 @@ pipeline {
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
-          version: 'v1.0'
+          version: 'v1.1'
 
         )
       }
