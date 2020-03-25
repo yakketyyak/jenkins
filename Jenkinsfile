@@ -60,6 +60,7 @@ pipeline {
     stage('Deploy docker image'){
       steps{
         sh'''
+          docker rmi $(docker images --filter=reference="${ARTIFACTID}:${VERSION}" -q)
           docker build -t ${ARTIFACTID}:${VERSION} -f Dockerfile .
           docker login -u admin -p admin localhost:8123
           docker push localhost:8123/repository/docker-repo/${ARTIFACTID}:${VERSION}
