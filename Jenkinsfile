@@ -38,9 +38,9 @@ pipeline {
         nexusArtifactUploader(
           artifacts: [
             [
-              artifactId: '${ARTIFACTID}', 
+              artifactId: 'spring-test', 
               classifier: '', 
-              file: 'target/${ARTIFACTID}-${VERSION}.jar', 
+              file: 'target/spring-test-0.0.1-SNAPSHOT.jar', 
               type: 'jar'
             ]
 
