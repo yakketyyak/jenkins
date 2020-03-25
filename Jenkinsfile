@@ -72,8 +72,8 @@ pipeline {
          //docker logout localhost:8123
          script{
             dockerImage = docker.build registry + ":0.0.1-SNAPSHOT"
-            docker.withRegistry( 'http://localhost:8123/docker-repo', registryCredential ) {
-            dockerImage.push()
+            docker.withRegistry( 'http://localhost:8123', registryCredential ) {
+            dockerImage.push('latest')
          }
       }
     }
