@@ -86,6 +86,15 @@ pipeline {
             dockerImage.push('latest')
            }
         }
+
+        stage('Zip File'){
+          zip(
+            archive: true, 
+            dir: '', 
+            glob: '**/*.spring-test*.jar', 
+            zipFile: 'spring-test'
+            ) 
+        }
       }
     }
   } 

@@ -7,3 +7,15 @@ CREATE TABLE test (
   career VARCHAR(250) DEFAULT NULL
 );
 
+DROP TABLE IF EXISTS user;
+ 
+CREATE TABLE user (
+  id INT(11) AUTO_INCREMENT  PRIMARY KEY,
+  user_name VARCHAR(50) NOT NULL,
+  first_name VARCHAR(250) NOT NULL,
+  last_name VARCHAR(250) NOT NULL,
+  email VARCHAR(250) DEFAULT NULL
+  
+);
+
+
