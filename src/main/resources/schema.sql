@@ -14,8 +14,32 @@ CREATE TABLE user (
   user_name VARCHAR(50) NOT NULL,
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
-  email VARCHAR(250) DEFAULT NULL
+  email VARCHAR(250) DEFAULT NULL,
+  account_id INT(11)
   
 );
+
+CREATE TABLE type_of_account (
+  id INT(11) AUTO_INCREMENT  PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+  
+);
+
+CREATE TABLE account (
+  account_number VARCHAR(15) PRIMARY KEY,
+  amount NUMERIC NOT NULL DEFAULT 0
+  
+);
+
+
+
+ALTER TABLE `user`
+ADD CONSTRAINT `user_account`
+FOREIGN KEY (`account_id`)
+REFERENCES `Account` (`account_number`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+
 
 

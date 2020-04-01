@@ -15,8 +15,8 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode
-@Table(name = "test")
-public class Test implements Serializable {
+@Table(name = "type_of_account")
+public class TypeOfAccount implements Serializable {
 
 	/**
 	 * 
@@ -25,23 +25,7 @@ public class Test implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
-	@Column(name = "career")
-	private String career;
-
-	public Test() {
-
-	}
-
-	public Test(String firstName, String lastName, String career) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.career = career;
-
-	}
-
+	@Column(name = "name")
+	private String name;
 
 }

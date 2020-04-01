@@ -6,3 +6,7 @@ INSERT INTO test (first_name, last_name, career) VALUES
   INSERT INTO user (user_name, first_name, last_name, email) VALUES
   ('pabeu', 'Patrick', 'BEUGRE', 'pabeu@gmail.com'),
  ('patrick', 'Privat', 'GNONGO', 'pt.beugre@gmail.com');
+ 
+ INSERT INTO type_of_account (name) VALUES
+  ('CCHQ'),
+  ('LIVRA');
