@@ -26,8 +26,9 @@ CREATE TABLE type_of_account (
 );
 
 CREATE TABLE account (
-  account_number VARCHAR(15) PRIMARY KEY,
-  amount NUMERIC NOT NULL DEFAULT 0
+  account_number INT(11) PRIMARY KEY,
+  amount NUMERIC NOT NULL DEFAULT 0,
+  type_of_account_id INT(11)
   
 );
 
@@ -36,7 +37,14 @@ CREATE TABLE account (
 ALTER TABLE `user`
 ADD CONSTRAINT `user_account`
 FOREIGN KEY (`account_id`)
-REFERENCES `Account` (`account_number`)
+REFERENCES `account` (`account_number`)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
+
+ALTER TABLE `account`
+ADD CONSTRAINT `account_type`
+FOREIGN KEY (`type_of_account_id`)
+REFERENCES `type_of_account` (`id`)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION;
 
