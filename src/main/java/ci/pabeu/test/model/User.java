@@ -1,6 +1,7 @@
 package ci.pabeu.test.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,6 +43,8 @@ public class User implements Serializable {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "account_id")
 	private Account account;
+	@Column(name = "birth_day")
+	private Date birthDay;
 
 	public User() {
 
