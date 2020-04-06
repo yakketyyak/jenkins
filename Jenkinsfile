@@ -10,7 +10,7 @@ pipeline {
       stage('Docker Build') { 
         steps{
           script{
-            `docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
+            docker.image('maven:3.6-jdk-8').inside ('-v $HOME/.m2:/root/.m2'){
           
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
@@ -26,7 +26,7 @@ pipeline {
                 echo $WORKSPACE
               '''
             }
-        }`
+        }
       }
      }
       
@@ -87,14 +87,14 @@ pipeline {
            }
         }
 
-        stage('Zip File'){
-          zip(
-            archive: true, 
-            dir: '', 
-            glob: '**/*.spring-test*.jar', 
-            zipFile: 'spring-test'
-            ) 
-        }
+        //stage('Zip File'){
+          //zip(
+            //archive: true, 
+            //dir: '', 
+            //glob: '**/*.spring-test*.jar', 
+            //zipFile: 'spring-test'
+            //) 
+        //}
       }
     }
   } 

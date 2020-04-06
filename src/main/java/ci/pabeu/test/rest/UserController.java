@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -54,7 +54,7 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.CREATED);
 	}
 
-	@PutMapping(value = "/update/{id}", consumes = { "application/json" }, produces = { "application/json" })
+	@PutMapping(value = "/{id}", consumes = { "application/json" }, produces = { "application/json" })
 	public ResponseEntity<User> update(@RequestBody UserDto userDto, @PathVariable(name = "id") Long id) throws ParseException {
 		slf4jLogger.info("update");
 		User founded = userRepository.getOne(id);
@@ -71,7 +71,7 @@ public class UserController {
 		return new ResponseEntity<>(founded, HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/delete/{id}", produces = { "application/json" })
+	@DeleteMapping(value = "/{id}", produces = { "application/json" })
 	public void delete(@PathVariable(name = "id") Long id) {
 		slf4jLogger.info("delete");
 		User founded = userRepository.getOne(id);
@@ -79,13 +79,13 @@ public class UserController {
 
 	}
 
-	@GetMapping(value = "/getAll", produces = { "application/json" })
+	@GetMapping(value = "/", produces = { "application/json" })
 	public ResponseEntity<List<User>> getAll() {
 		slf4jLogger.info("getAll");
 		return new ResponseEntity<>(userRepository.getAll(), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/get/{id}", produces = { "application/json" })
+	@GetMapping(value = "/{id}", produces = { "application/json" })
 	public ResponseEntity<User> get(@PathVariable(name = "id") Long id) {
 		User founded = userRepository.getOne(id);
 		slf4jLogger.info("founded " + founded);
