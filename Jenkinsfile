@@ -93,8 +93,8 @@ pipeline {
           zip(
             archive: true, 
             dir: '', 
-            glob: '**/*.spring-test*.jar', 
-            zipFile: 'spring-test'
+            glob: '', 
+            zipFile: '**/*.spring-test*.jar'
             ) 
         }
     }
