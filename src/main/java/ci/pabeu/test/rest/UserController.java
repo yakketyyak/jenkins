@@ -51,7 +51,7 @@ public class UserController {
 
 		user = userRepository.save(user);
 
-		return new ResponseEntity<>(user, HttpStatus.CREATED);
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 
 	@PutMapping(value = "/{id}", consumes = { "application/json" }, produces = { "application/json" })
@@ -68,7 +68,7 @@ public class UserController {
 		}
 		founded = userRepository.save(founded);
 
-		return new ResponseEntity<>(founded, HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body(founded);
 	}
 
 	@DeleteMapping(value = "/{id}", produces = { "application/json" })
@@ -82,7 +82,7 @@ public class UserController {
 	@GetMapping(value = "/", produces = { "application/json" })
 	public ResponseEntity<List<User>> getAll() {
 		slf4jLogger.info("getAll");
-		return new ResponseEntity<>(userRepository.getAll(), HttpStatus.OK);
+		return ResponseEntity.status(HttpStatus.OK).body(userRepository.getAll());
 	}
 
 	@GetMapping(value = "/{id}", produces = { "application/json" })
