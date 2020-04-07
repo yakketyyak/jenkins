@@ -86,8 +86,10 @@ pipeline {
             dockerImage.push('latest')
            }
         }
-
-        stage('Zip File'){
+      }
+    }
+    stage('Zip file'){
+      steps{
           zip(
             archive: true, 
             dir: '', 
@@ -95,7 +97,6 @@ pipeline {
             zipFile: 'spring-test'
             ) 
         }
-      }
     }
   } 
 }
