@@ -81,7 +81,7 @@ pipeline {
          '''*/
          //docker logout localhost:8123
          script{
-            dockerImage = docker.build registry + version
+            dockerImage = docker.build registry + '-' + version
             docker.withRegistry(registryUrl, registryCredential ) {
             dockerImage.push('latest')
            }
