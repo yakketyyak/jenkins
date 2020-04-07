@@ -87,14 +87,14 @@ pipeline {
            }
         }
 
-        //stage('Zip File'){
-          //zip(
-            //archive: true, 
-            //dir: '', 
-            //glob: '**/*.spring-test*.jar', 
-            //zipFile: 'spring-test'
-            //) 
-        //}
+        stage('Zip File'){
+          zip(
+            archive: true, 
+            dir: '', 
+            glob: '**/*.spring-test*.jar', 
+            zipFile: 'spring-test'
+            ) 
+        }
       }
     }
   } 
