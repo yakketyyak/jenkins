@@ -15,9 +15,11 @@ pipeline {
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
               sh '''
-                 mvn -v
                  mvn -B -DskipTests clean package
               '''
+              retry(3){
+                sh 'mvn -v'
+              }
             }
 
             stage('Test'){
