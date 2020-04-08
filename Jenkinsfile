@@ -25,8 +25,8 @@ pipeline {
             stage('Test'){
               sh '''
                 mvn test
-                echo $WORKSPACE
               '''
+              archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
       }
