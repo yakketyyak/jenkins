@@ -60,7 +60,7 @@ pipeline {
           nexusVersion: 'nexus3', 
           protocol: 'http', 
           repository: 'maven-releases', 
-          version: '1.0.1'
+          version: '1.0.2'
 
         )
         sha1 "target/${env.artifactId}-${env.version}.${env.packaging}"
@@ -94,7 +94,7 @@ pipeline {
           zip(
             archive: true, 
             dir: '', 
-            glob: '**/*.spring-test*.jar', 
+            glob: 'target/spring-test*.jar', 
             zipFile: 'spring-test.zip'
             ) 
         }
