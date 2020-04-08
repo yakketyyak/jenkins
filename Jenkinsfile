@@ -63,7 +63,7 @@ pipeline {
           version: '1.0.1'
 
         )
-        sha1 'target/${env.artifactId}-${env.version}.${env.packaging}'
+        sha1 "target/${env.artifactId}-${env.version}.${env.packaging}"
       }
     }
 
