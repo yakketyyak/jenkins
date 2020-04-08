@@ -62,7 +62,8 @@ pipeline {
           repository: 'maven-releases', 
           version: '1.0.1'
 
-        )
+        ),
+        sha1 'target/${env.artifactId}-${env.version}.${env.packaging}'
       }
     }
 

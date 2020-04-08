@@ -8,6 +8,7 @@ public class SpringTestApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringTestApplication.class, args);
+		// test stage
 	}
 
 }
