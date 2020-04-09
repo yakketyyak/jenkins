@@ -34,7 +34,11 @@ pipeline {
       
     }
 
-    stage('Deploy on nexus'){
+    stage('Deploy'){
+
+      parallel {
+
+         stage('Deploy on nexus'){
 
       environment {
         artifactId = readMavenPom().getArtifactId()
@@ -91,6 +95,9 @@ pipeline {
         }
       }
     }
+    }
+    }
+    
     stage('Zip file'){
       steps{
           zip(
