@@ -102,6 +102,9 @@ pipeline {
     }
     
     stage('Zip file'){
+       when {
+        branch 'master'
+      }
       steps{
           zip(
             archive: true, 
