@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -65,16 +66,19 @@ public class RestControllerTests {
 	}
 
 	@Test
+	@DisplayName("Check repository")
 	public void contexLoads() throws Exception {
 		assertThat(typeOfAccountRepository).isNotNull();
 	}
 
 	@Test
+	@DisplayName("Check controller")
 	public void contexLoadsOne() throws Exception {
 		assertThat(accountController).isNotNull();
 	}
 
 	@Test
+	@DisplayName("Method /account/type/get")
 	public void getTypes() throws Exception {
 		// Given
 		final int expectedSize = 2;
