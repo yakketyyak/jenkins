@@ -20,11 +20,15 @@ CREATE TABLE user (
   
 );
 
+DROP TABLE IF EXISTS type_of_account;
+
 CREATE TABLE type_of_account (
   id INT(11) AUTO_INCREMENT  PRIMARY KEY,
   name VARCHAR(50) NOT NULL
   
 );
+
+DROP TABLE IF EXISTS account;
 
 CREATE TABLE account (
   account_number INT(11) PRIMARY KEY,
