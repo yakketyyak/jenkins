@@ -60,7 +60,7 @@ public class RestControllerTests {
 	}
 
 	@After
-	private void setDown() {
+	public void setDown() {
 		System.out.println("After all tests");
 
 	}
