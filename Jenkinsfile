@@ -59,7 +59,7 @@ pipeline {
               artifactId: "${env.artifactId}", 
               classifier: '', 
               file: "target/${env.artifactId}-${env.version}.${env.packaging}", 
-              type: 'jar'
+              type: "${env.packaging}"
             ]
 
           ],
