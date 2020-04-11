@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ci.pabeu.test.model.Account;
@@ -23,12 +22,9 @@ public class AccountServiceImpl implements AccountService {
 
 	private static final Logger slf4jLogger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
-	@Autowired
-	private AccountRepository accountRepository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private TypeOfAccountRepository typeOfAccountRepository;
+	private final AccountRepository accountRepository;
+	private final UserRepository userRepository;
+	private final TypeOfAccountRepository typeOfAccountRepository;
 
 	@Override
 	public Account depot(Long accountNumber, BigDecimal deposit) {
