@@ -1,15 +1,13 @@
-DROP TABLE IF EXISTS test;
- 
-CREATE TABLE test (
+
+ CREATE TABLE IF NOT EXISTS test (
   id INT(11) AUTO_INCREMENT  PRIMARY KEY,
   first_name VARCHAR(250) NOT NULL,
   last_name VARCHAR(250) NOT NULL,
   career VARCHAR(250) DEFAULT NULL
 );
 
-DROP TABLE IF EXISTS user;
  
-CREATE TABLE user (
+CREATE TABLE IF NOT EXISTS user (
   id INT(11) AUTO_INCREMENT  PRIMARY KEY,
   user_name VARCHAR(50) NOT NULL,
   first_name VARCHAR(250) NOT NULL,
@@ -20,17 +18,14 @@ CREATE TABLE user (
   
 );
 
-DROP TABLE IF EXISTS type_of_account;
 
-CREATE TABLE type_of_account (
+CREATE TABLE IF NOT EXISTS type_of_account (
   id INT(11) AUTO_INCREMENT  PRIMARY KEY,
   name VARCHAR(50) NOT NULL
   
 );
 
-DROP TABLE IF EXISTS account;
-
-CREATE TABLE account (
+CREATE TABLE IF NOT EXISTS account (
   account_number INT(11) PRIMARY KEY,
   amount NUMERIC NOT NULL DEFAULT 0,
   type_of_account_id INT(11)
