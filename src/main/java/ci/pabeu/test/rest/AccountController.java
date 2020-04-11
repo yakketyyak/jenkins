@@ -41,7 +41,7 @@ public class AccountController {
 
 	@GetMapping(value = "/type/get", produces = { "application/json" })
 	public ResponseEntity<List<TypeOfAccount>> getType() {
-		slf4jLogger.info("/type/get");
+		slf4jLogger.info("/type/get " + this.typeOfAccountRepository.findAll().size());
 
 		return new ResponseEntity<>(this.typeOfAccountRepository.findAll(), HttpStatus.OK);
 	}

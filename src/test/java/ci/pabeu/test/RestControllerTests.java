@@ -81,7 +81,8 @@ public class RestControllerTests {
 	@DisplayName("Method /account/type/get")
 	public void getTypes() throws Exception {
 		// Given
-		final int expectedSize = 2;
+		final int expectedSize = 4;
+		System.out.println("expectedSize " + expectedSize);
 
 		// When
 		MvcResult mvcResult = mvc.perform(

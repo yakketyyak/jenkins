@@ -33,8 +33,7 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 
-
-ALTER TABLE `user`
+/*ALTER TABLE `user`
 ADD CONSTRAINT `user_account`
 FOREIGN KEY (`account_id`)
 REFERENCES `account` (`account_number`)
@@ -46,7 +45,7 @@ ADD CONSTRAINT `account_type`
 FOREIGN KEY (`type_of_account_id`)
 REFERENCES `type_of_account` (`id`)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION;
+ON UPDATE NO ACTION;*/
 
 
 
