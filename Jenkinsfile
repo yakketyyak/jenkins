@@ -15,11 +15,12 @@ pipeline {
             stage('Build'){
               git 'https://github.com/yakketyyak/jenkins.git'
               sh '''
-                 mvn -B -DskipTests clean package
+                 mvn -B -DskipTests clean package -X
+                 mvn dependency:analyze-duplicate
               '''
-              retry(3){
+              /*retry(3){
                 sh 'mvn -v'
-              }
+              }*/
             }
 
             stage('Test'){
