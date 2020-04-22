@@ -27,7 +27,6 @@ pipeline {
               sh '''
                 mvn test
               '''
-              archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
       }
@@ -116,4 +115,11 @@ pipeline {
         }
     }
   } 
+
+  post {
+        always {
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            junit 'target/surefire-reports/*.xml'
+        }
+    }
 }
