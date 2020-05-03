@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.TermVector;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -20,6 +24,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @Table(name = "account")
+@Indexed
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Account implements Serializable {
 
@@ -30,6 +35,7 @@ public class Account implements Serializable {
 	@Id
 	private Long accountNumber;
 	@Column(name = "amount")
+	@Field(termVector = TermVector.YES)
 	private BigDecimal amount;
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "type_of_account_id")
