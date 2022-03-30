@@ -152,3 +152,5 @@ if __name__ == '__main__':
 
   } 
 }
+requirements.txt
+openapi-spec-validator
