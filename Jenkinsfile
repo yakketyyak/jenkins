@@ -154,3 +154,4 @@ if __name__ == '__main__':
 }
 requirements.txt
 openapi-spec-validator
+https://nordicapis.com/8-openapi-linters/
