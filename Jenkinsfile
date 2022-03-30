@@ -114,5 +114,41 @@ pipeline {
             ) 
         }
     }
+        
+        
+        import glob
+import json
+import sys
+from datetime import datetime
+
+from openapi_spec_validator import validate_spec
+
+OPEN_API_SPEC_KEYWORD = 'openapi'
+
+
+def validate_api_version(version):
+    try:
+        datetime.strptime(version, '%Y-%m')
+    except ValueError:
+        raise ValueError('Incorrect api version format, should be yyyy-mm found : {}'.format(version))
+
+
+def validate_open_api_file():
+    for filename in glob.iglob('domains/**', recursive=True):
+        if filename.lower().endswith('json'):
+            with open(filename, 'r') as json_file:
+                open_api_spec = json.load(json_file)
+                validate_spec(open_api_spec)
+                open_api_info = open_api_spec.get('info')
+                if open_api_info is None:
+                    print('API info must be set')
+                    sys.exit(1)
+                api_version = open_api_info.get('version')
+                validate_api_version(api_version)
+
+
+if __name__ == '__main__':
+    validate_open_api_file()
+
   } 
 }
